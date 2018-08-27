@@ -14,7 +14,7 @@ public class T_medicinetype implements Serializable {
 	}
 	public void setMedicineTypeId(String medicineTypeId) {
 		this.medicineTypeId = medicineTypeId;
-	}
+	} 
 	public String getMedicinename() {
 		return medicinename;
 	}
