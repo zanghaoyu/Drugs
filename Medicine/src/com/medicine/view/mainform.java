@@ -47,53 +47,65 @@ public class mainform extends JFrame {
 		menuBar.setBounds(0, 0, 617, 21);
 		contentPane.add(menuBar);
 		
-		JMenu menu = new JMenu("\u836F\u54C1\u7BA1\u7406");
-		menuBar.add(menu);
+		//管理菜单
+		JMenu manage = new JMenu("\u7BA1\u7406");
+		menuBar.add(manage);
 		
-		JMenuItem addDrugs = new JMenuItem("\u6DFB\u52A0\u836F\u54C1");
-		menu.add(addDrugs);
+		//管理员注册
+		JMenuItem administrators = new JMenuItem("\u7BA1\u7406\u5458\u6CE8\u518C");
+		manage.add(administrators);
 		
-		JMenuItem checkDrugs = new JMenuItem("\u67E5\u8BE2\u836F\u54C1");
-		menu.add(checkDrugs);
+		//登记
+		JMenu login = new JMenu("\u767B\u8BB0");
+		manage.add(login);
 		
-		JMenuItem saleDrugs = new JMenuItem("\u836F\u54C1\u9500\u552E");
-		menu.add(saleDrugs);
+		//药品登记
+		JMenuItem DrugLogin = new JMenuItem("\u836F\u54C1\u767B\u8BB0");
+		login.add(DrugLogin);
 		
-		JMenu menu_1 = new JMenu("\u4F9B\u5E94\u5546\u7BA1\u7406");
-		menuBar.add(menu_1);
+		//供应商登记
+		JMenuItem SupplierLogin = new JMenuItem("\u4F9B\u5E94\u5546\u767B\u8BB0");
+		login.add(SupplierLogin);
 		
-		JMenuItem addSuppiler = new JMenuItem("\u6DFB\u52A0\u4F9B\u5E94\u5546");
-		menu_1.add(addSuppiler);
+		//患者登记
+		JMenuItem CustomerLogin = new JMenuItem("\u60A3\u8005\u767B\u8BB0");
+		login.add(CustomerLogin);
 		
-		JMenuItem checkSuppiler = new JMenuItem("\u67E5\u8BE2\u4F9B\u5E94\u5546");
-		menu_1.add(checkSuppiler);
+		//库存登记
+		JMenuItem StockLogin = new JMenuItem("\u5E93\u5B58\u767B\u8BB0");
+		login.add(StockLogin);
 		
-		JMenu menu_2 = new JMenu("\u5E93\u5B58\u7BA1\u7406");
-		menuBar.add(menu_2);
+		//查询
+		JMenu Check = new JMenu("\u67E5\u8BE2");
+		menuBar.add(Check);
 		
-		JMenuItem addStock = new JMenuItem("\u6DFB\u52A0\u5E93\u5B58");
-		menu_2.add(addStock);
+		//药品查询
+		JMenuItem DrugCheck = new JMenuItem("\u836F\u54C1\u67E5\u8BE2");
+		Check.add(DrugCheck);
 		
-		JMenuItem checkStorck = new JMenuItem("\u67E5\u8BE2\u5E93\u5B58");
-		menu_2.add(checkStorck);
+		//供应商查询
+		JMenuItem SupplierCheck = new JMenuItem("\u4F9B\u5E94\u5546\u67E5\u8BE2");
+		Check.add(SupplierCheck);
 		
-		JMenu menu_3 = new JMenu("\u5BA2\u6237\u7BA1\u7406");
-		menuBar.add(menu_3);
+		//用户查询
+		JMenuItem UserCheck = new JMenuItem("\u7528\u6237\u4FE1\u606F\u67E5\u8BE2");
+		Check.add(UserCheck);
 		
-		JMenuItem addCut = new JMenuItem("\u6DFB\u52A0\u5BA2\u6237");
-		menu_3.add(addCut);
+		//库存查询
+		JMenuItem StockCheck = new JMenuItem("\u5E93\u5B58\u67E5\u8BE2");
+		Check.add(StockCheck);
 		
-		JMenuItem checkCut = new JMenuItem("\u67E5\u8BE2\u5BA2\u6237");
-		menu_3.add(checkCut);
+		//患者查询
+		JMenuItem CustomerCheck = new JMenuItem("\u60A3\u8005\u67E5\u8BE2");
+		Check.add(CustomerCheck);
 		
-		JMenu menu_4 = new JMenu("\u7528\u6237\u7BA1\u7406");
-		menuBar.add(menu_4);
+		//购买记录查询
+		JMenuItem BuyCheck = new JMenuItem("\u8D2D\u4E70\u8BB0\u5F55\u67E5\u8BE2");
+		Check.add(BuyCheck);
 		
-		JMenuItem addUser = new JMenuItem("\u6DFB\u52A0\u7528\u6237");
-		menu_4.add(addUser);
-		
-		JMenuItem checkUser = new JMenuItem("\u67E5\u8BE2\u7528\u6237");
-		menu_4.add(checkUser);
+		//出售
+		JMenu Sell = new JMenu("\u51FA\u552E");
+		menuBar.add(Sell);
 		desktopPane.setBounds(0, 21, 617, 382);
 		contentPane.add(desktopPane);
 		
