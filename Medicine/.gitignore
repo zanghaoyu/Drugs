@@ -1,0 +1,9 @@
+java.gitigonre
+#Compiled class file
+*.class
+#log file
+*.log
+#BlueJ files
+*.ctxt
+#Mobile Tools for Java(J2ME)
+.mtj.tmp/
