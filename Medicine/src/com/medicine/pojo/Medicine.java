@@ -2,7 +2,7 @@ package com.medicine.pojo;
 
 import java.io.Serializable;
 
-public class T_Medicine implements Serializable{
+public class Medicine implements Serializable{
 
 	/**
 	 * 

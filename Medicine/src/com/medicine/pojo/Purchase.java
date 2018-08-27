@@ -3,7 +3,7 @@ package com.medicine.pojo;
 import java.io.Serializable;
 import java.sql.Date;
 
-public class T_purchase implements Serializable {
+public class Purchase implements Serializable {
 
 	/**
 	 * 
