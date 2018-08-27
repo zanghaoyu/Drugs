@@ -94,7 +94,8 @@ public class mainform extends JFrame {
 		
 		JMenuItem checkUser = new JMenuItem("\u67E5\u8BE2\u7528\u6237");
 		menu_4.add(checkUser);
-		desktopPane.setBounds(0, 21, 617, 382);
+		desktopPane.setBounds(0, 21, 617, 381);
 		contentPane.add(desktopPane);
+		
 	}
 }
