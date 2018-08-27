@@ -22,7 +22,7 @@ public class T_Medicine implements Serializable{
 	private String medicineTypeId;
 	
 	public String getMedicineId() {
-		return medicineId;
+		return medicineId; 
 	}
 	public void setMedicineId(String medicineId) {
 		this.medicineId = medicineId;

@@ -10,7 +10,7 @@ public class T_Stock implements Serializable{
 	private static final long serialVersionUID = 610004516615435294L;
 	
 	//“©∆∑id
-	private String medicineId;
+	private String medicineId; 
 	//ø‚¥Ê¡ø
 	private Integer amount;
 	
