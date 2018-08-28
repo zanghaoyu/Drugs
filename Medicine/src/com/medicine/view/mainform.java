@@ -54,8 +54,15 @@ public class mainform extends JFrame {
 		menuBar.add(manage);
 		
 		//管理员注册
-		JMenuItem administrators = new JMenuItem("\u7BA1\u7406\u5458\u6CE8\u518C");
-		manage.add(administrators);
+				JMenuItem administrators = new JMenuItem("\u7BA1\u7406\u5458\u6CE8\u518C");
+				administrators.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						UserLogonForm ulof = new UserLogonForm();
+						ulof.setVisible(true);
+						desktopPane.add(ulof);
+					}
+				});
+				manage.add(administrators);
 		
 		//登记
 		JMenu login = new JMenu("\u767B\u8BB0");
