@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 
 public class MainForm extends JFrame {
 
-	
 	private JPanel contentPane;
 	private final JDesktopPane desktopPane = new JDesktopPane();
 
