@@ -42,14 +42,14 @@ public class StorckDaoImpl implements StorckDao {
 
 	@Override
 	public int addStorck(Stock stock) {
-		String sql ="insert into t_storck values(?,?)";
+		String sql ="insert into t_stock values(?,?)";
 		int rows = DBUTIL.executeUpdate(sql, stock.getMedicineId(),stock.getAmount());
 		return rows;
 	}
 
 	@Override
 	public int deleStorck(int storckId) {
-		String sql = "delete from t_storck where medicineid=?";
+		String sql = "delete from t_stock where medicineid=?";
 		int rows = DBUTIL.executeUpdate(sql, storckId);
 		return rows;
 	}
