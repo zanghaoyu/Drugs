@@ -10,8 +10,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JDesktopPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class mainform extends JFrame {
 
@@ -39,14 +37,14 @@ public class mainform extends JFrame {
 	 */
 	public mainform() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800,800);
+		setBounds(100, 100, 633, 441);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 784, 21);
+		menuBar.setBounds(0, 0, 617, 21);
 		contentPane.add(menuBar);
 		
 		//管理菜单
@@ -63,13 +61,6 @@ public class mainform extends JFrame {
 		
 		//药品登记
 		JMenuItem DrugLogin = new JMenuItem("\u836F\u54C1\u767B\u8BB0");
-		DrugLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MedicineAdd medicineadd =new MedicineAdd();
-				medicineadd.setVisible(true);
-				desktopPane.add(medicineadd);
-			}
-		});
 		login.add(DrugLogin);
 		
 		//供应商登记
@@ -90,14 +81,6 @@ public class mainform extends JFrame {
 		
 		//药品查询
 		JMenuItem DrugCheck = new JMenuItem("\u836F\u54C1\u67E5\u8BE2");
-		DrugCheck.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MedicineCheck medicinecheck=new MedicineCheck();
-				medicinecheck.setVisible(true);
-				desktopPane.add(medicinecheck);
-				
-			}
-		});
 		Check.add(DrugCheck);
 		
 		//供应商查询
@@ -123,7 +106,7 @@ public class mainform extends JFrame {
 		//出售
 		JMenu Sell = new JMenu("\u51FA\u552E");
 		menuBar.add(Sell);
-		desktopPane.setBounds(0, 21, 784, 729);
+		desktopPane.setBounds(0, 21, 617, 382);
 		contentPane.add(desktopPane);
 		
 	}
