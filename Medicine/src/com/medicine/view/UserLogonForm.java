@@ -44,6 +44,7 @@ public class UserLogonForm extends JInternalFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
