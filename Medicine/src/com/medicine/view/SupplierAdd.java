@@ -5,13 +5,20 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.medicine.dao.SupplierDao;
+import com.medicine.dao.impl.SupplierDaoImpl;
+import com.medicine.pojo.Supplier;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SupplierAdd extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textSuppId;
+	private JTextField textSuppName;
+	private JTextField textSuppAddress;
+	private JTextField textSuppPhopne;
 
 	/**
 	 * Launch the application.
@@ -54,33 +61,59 @@ public class SupplierAdd extends JInternalFrame {
 		label_3.setBounds(139, 163, 68, 15);
 		getContentPane().add(label_3);
 		
-		textField = new JTextField();
-		textField.setBounds(212, 23, 101, 21);
-		getContentPane().add(textField);
-		textField.setColumns(10);
+		textSuppId = new JTextField();
+		textSuppId.setBounds(212, 23, 101, 21);
+		getContentPane().add(textSuppId);
+		textSuppId.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(212, 73, 242, 21);
-		getContentPane().add(textField_1);
+		textSuppName = new JTextField();
+		textSuppName.setColumns(10);
+		textSuppName.setBounds(212, 73, 242, 21);
+		getContentPane().add(textSuppName);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(212, 115, 242, 21);
-		getContentPane().add(textField_2);
+		textSuppAddress = new JTextField();
+		textSuppAddress.setColumns(10);
+		textSuppAddress.setBounds(212, 115, 242, 21);
+		getContentPane().add(textSuppAddress);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(212, 160, 242, 21);
-		getContentPane().add(textField_3);
+		textSuppPhopne = new JTextField();
+		textSuppPhopne.setColumns(10);
+		textSuppPhopne.setBounds(212, 160, 242, 21);
+		getContentPane().add(textSuppPhopne);
 		
-		JButton button = new JButton("\u786E\u8BA4\u767B\u8BB0");
-		button.setBounds(139, 236, 93, 23);
-		getContentPane().add(button);
 		
-		JButton button_1 = new JButton("\u91CD\u7F6E");
-		button_1.setBounds(384, 236, 93, 23);
-		getContentPane().add(button_1);
+		//添加供应商
+		JButton add = new JButton("\u786E\u8BA4\u767B\u8BB0");
+		add.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//创建一个新的供应商对象，获取信息
+				Supplier supp=new Supplier();
+				supp.setSupplierid(textSuppId.getText());
+				supp.setSuppliername(textSuppName.getText());
+				supp.setAddress(textSuppAddress.getText());
+				supp.setPhone(textSuppPhopne.getText());
+				
+				//实现添加
+				SupplierDao sd=new SupplierDaoImpl();
+				sd.addSupplier(supp);
+				
+			}
+		});
+		add.setBounds(139, 236, 93, 23);
+		getContentPane().add(add);
+		
+		JButton rest = new JButton("\u91CD\u7F6E");
+		rest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textSuppId.setText("");
+				textSuppName.setText("");
+				textSuppAddress.setText("");
+				textSuppPhopne.setText("");
+				
+			}
+		});
+		rest.setBounds(384, 236, 93, 23);
+		getContentPane().add(rest);
 
 	}
 

@@ -16,8 +16,10 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.medicine.dao.MedicineDao;
+import com.medicine.dao.PurchaseDao;
 import com.medicine.dao.SupplierDao;
 import com.medicine.dao.impl.MedicineDaoImpl;
+import com.medicine.dao.impl.PurchaseDaoImpl;
 import com.medicine.dao.impl.SupplierDaoImpl;
 import com.medicine.pojo.Medicine;
 import com.medicine.pojo.Purchase;
@@ -71,7 +73,7 @@ public class MedicineAdd extends JInternalFrame {
 		panel.add(textmedicineId);
 		
 		JLabel label = new JLabel("\u836F\u54C1\u7F16\u53F7");
-		label.setBounds(49, 34, 54, 15);
+		label.setBounds(36, 45, 54, 15);
 		panel.add(label);
 		
 		JLabel label_1 = new JLabel("\u8FDB  \u4EF7  ");
@@ -89,7 +91,7 @@ public class MedicineAdd extends JInternalFrame {
 		panel.add(label_2);
 		
 		JLabel label_3 = new JLabel("\u836F\u54C1\u540D\u79F0");
-		label_3.setBounds(262, 34, 54, 15);
+		label_3.setBounds(262, 45, 54, 15);
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("\u96F6\u552E\u4EF7  ");
@@ -99,7 +101,7 @@ public class MedicineAdd extends JInternalFrame {
 		//药品名称
 		textmedicinename = new JTextField();
 		textmedicinename.setColumns(10);
-		textmedicinename.setBounds(314, 31, 106, 21);
+		textmedicinename.setBounds(314, 42, 106, 21);
 		panel.add(textmedicinename);
 		
 		//零售价  
@@ -113,7 +115,7 @@ public class MedicineAdd extends JInternalFrame {
 		panel.add(label_5);
 		
 		JLabel label_6 = new JLabel("\u836F\u54C1\u89C4\u683C");
-		label_6.setBounds(468, 34, 54, 15);
+		label_6.setBounds(469, 45, 54, 15);
 		panel.add(label_6);
 		
 		JLabel label_7 = new JLabel("\u4F9B\u5E94\u5546\u540D\u79F0");
@@ -135,7 +137,7 @@ public class MedicineAdd extends JInternalFrame {
 		//药品规格
 		textunit = new JTextField();
 		textunit.setColumns(10);
-		textunit.setBounds(548, 31, 106, 21);
+		textunit.setBounds(548, 42, 106, 21);
 		panel.add(textunit);
 		
 		//药品产地
@@ -148,7 +150,7 @@ public class MedicineAdd extends JInternalFrame {
 		label_8.setBounds(82, 104, 54, 15);
 		panel.add(label_8);
 		
-		//添加
+		//添加药品
 		JButton btnNewButton = new JButton("\u6DFB\u52A0");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -164,10 +166,8 @@ public class MedicineAdd extends JInternalFrame {
 				medi.setRegion(textregion.getText());
 				medi.setRetailPrice(Float.parseFloat(textretailprice.getText()));
 				
-				//获取供应商名称
-				String name = comboBox.getName();
-				//新建一个供应商dao，根据name查找供应商id
-				SupplierDao sd=new SupplierDaoImpl();
+		
+				
 				
 			}
 		});

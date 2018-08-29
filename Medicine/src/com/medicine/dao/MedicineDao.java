@@ -12,4 +12,13 @@ public interface MedicineDao {
 	public int addDrug(Medicine medicine);
 	
 	//根据药品名称查
+	public Vector checkDurg(String suppName);
+	
+	//修改
+	public int chargeDrug(Medicine medicine);
+	
+	//判断是否关联
+	public Vector connect(String str);
+	
+	
 }
