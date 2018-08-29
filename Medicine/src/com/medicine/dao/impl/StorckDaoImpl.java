@@ -54,7 +54,7 @@ public class StorckDaoImpl implements StorckDao {
 		return rows;
 	}
 
-	@Override
+	@Override  
 	public int updateStorck(Stock stock) {
 		String sql ="update t_stock set amount=? where medicineid=?";
 		int rows = DBUTIL.executeUpdate(sql,stock.getAmount(),stock.getMedicineId());
@@ -114,7 +114,6 @@ public class StorckDaoImpl implements StorckDao {
 				rewsVector.add(v);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return rewsVector;
