@@ -15,6 +15,12 @@ public interface StorckDao {
 	//查询所有药品的库存量
 	public Vector getMedicineAmount();
 	
+	//查询药品的库存量和生产信息
+	public Vector getMedicineSupplierAmount();
+	
+	//根据药品名称查药品的库存量和信息
+	public Vector getMedicineSupplierAmountByName(String mdicineName);
+	
 	//添加库存
 	public int addStorck(Stock stock);
 	
@@ -23,6 +29,8 @@ public interface StorckDao {
 	
 	//修改库存
 	public int updateStorck(Stock stock);
+	
+	
 	
 
 }

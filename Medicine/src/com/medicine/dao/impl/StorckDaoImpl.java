@@ -66,7 +66,10 @@ public class StorckDaoImpl implements StorckDao {
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
-		String sql="SELECT t_medicine.MedicineId,t_medicine.Medicinename,t_medicine.unit,t_stock.Amount FROM t_medicine,t_stock WHERE t_medicine.MedicineId=t_stock.MedicineId AND t_medicine.Medicinename=? ";
+		String sql="SELECT t_medicine.MedicineId,t_medicine.Medicinename,t_medicine.unit,t_stock.Amount"
+				+ " FROM t_medicine,t_stock"
+				+ " WHERE t_medicine.MedicineId=t_stock.MedicineId"
+				+ " AND t_medicine.Medicinename LIKE \"%\"?\"%\" ";
 		Vector rewsVector = new Vector<>();
 		try {
 			conn = DBUTIL.getConn();
@@ -95,7 +98,6 @@ public class StorckDaoImpl implements StorckDao {
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
-		//String sql="SET @rowNO=0;SELECT (@rowNo := @rowNo+1) num,t_medicine.MedicineId,t_medicine.Medicinename,t_medicine.unit,t_stock.Amount FROM t_medicine,t_stock WHERE t_medicine.MedicineId=t_stock.MedicineId";
 		String sql="SELECT t_medicine.MedicineId,t_medicine.Medicinename,t_medicine.unit,t_stock.Amount FROM t_medicine,t_stock WHERE t_medicine.MedicineId=t_stock.MedicineId";
 		Vector rewsVector = new Vector<>();
 		try {
@@ -105,7 +107,6 @@ public class StorckDaoImpl implements StorckDao {
 			Vector v;
 			while(rs.next()){
 				v =new Vector<>();
-//				v.add(rs.getString("num"));
 				v.add(rs.getString("medicineId"));
 				v.add(rs.getString("Medicinename"));
 				v.add(rs.getString("unit"));
@@ -117,6 +118,85 @@ public class StorckDaoImpl implements StorckDao {
 			e.printStackTrace();
 		}
 		return rewsVector;
+	}
+
+	@Override
+	public Vector getMedicineSupplierAmount() {
+		Connection conn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		String sql="SELECT m.MedicineId,m.Medicinename,m.unit,m.region,s.suppliername,m.Retailprice,p.Purchaseprice,t.Amount"
+				+ " FROM t_medicine AS m, t_purchase AS p, t_supplier AS s,t_stock AS t"
+				+ " WHERE  m.MedicineId=p.MedicineId"
+				+ " AND p.supplierid=s.supplierid"
+				+ " AND t.MedicineId=m.MedicineId"
+				+ " AND p.MedicineId=t.MedicineId"
+				+ " ORDER BY m.MedicineId ASC";
+		Vector vector=new Vector<>();
+		try {
+			conn=DBUTIL.getConn();
+			pstm=conn.prepareStatement(sql);
+			rs=pstm.executeQuery();
+			Vector v;
+			while(rs.next()){
+				v=new Vector<>();
+				v.add(rs.getString("MedicineId"));
+				v.add(rs.getString("Medicinename"));
+				v.add(rs.getString("unit"));
+				v.add(rs.getString("region"));
+				v.add(rs.getString("suppliername"));
+				v.add(rs.getFloat("Retailprice"));
+				v.add(rs.getFloat("Purchaseprice"));
+				v.add(rs.getInt("Amount"));
+				vector.add(v);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			DBUTIL.close(conn, pstm , rs);
+		}
+		
+		return vector;
+	}
+
+	@Override
+	public Vector getMedicineSupplierAmountByName(String mdicineName) {
+		Connection conn=null;
+		PreparedStatement pstm=null;
+		ResultSet rs=null;
+		String sql="SELECT m.MedicineId,m.Medicinename,m.unit,m.region,s.suppliername,m.Retailprice,p.Purchaseprice,t.Amount"
+				+ " FROM t_medicine AS m, t_purchase AS p, t_supplier AS s,t_stock AS t"
+				+ " WHERE  m.MedicineId=p.MedicineId"
+				+ " AND p.supplierid=s.supplierid"
+				+ " AND t.MedicineId=m.MedicineId"
+				+ " AND p.MedicineId=t.MedicineId"
+				+ " AND m.Medicinename LIKE \"%\"?\"%\" ";
+		Vector vector=new Vector<>();
+		try {
+			conn=DBUTIL.getConn();
+			pstm=conn.prepareStatement(sql);
+			pstm.setString(1,mdicineName);
+			rs=pstm.executeQuery();
+			Vector v;
+			while(rs.next()){
+				v=new Vector<>();
+				v.add(rs.getString("MedicineId"));
+				v.add(rs.getString("Medicinename"));
+				v.add(rs.getString("unit"));
+				v.add(rs.getString("region"));
+				v.add(rs.getString("suppliername"));
+				v.add(rs.getFloat("Retailprice"));
+				v.add(rs.getFloat("Purchaseprice"));
+				v.add(rs.getInt("Amount"));
+				vector.add(v);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			DBUTIL.close(conn, pstm , rs);
+		}
+		
+		return vector;
 	}
 
 

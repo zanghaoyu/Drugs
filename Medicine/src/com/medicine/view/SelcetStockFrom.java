@@ -194,6 +194,8 @@ public class SelcetStockFrom extends JInternalFrame {
 					v.add("Ò©Æ·¹æ¸ñ");
 					v.add("¿â´æÁ¿");
 					model.setDataVector(storckdao.getMedicineAmount(), v);
+					tfMedicineId.setText("");
+					tfStockAmount.setText("");
 				}else{
 					JOptionPane.showMessageDialog(null, "É¾³ýÊ§°Ü£¡£¡£¡");
 				}
@@ -201,6 +203,5 @@ public class SelcetStockFrom extends JInternalFrame {
 		});
 		btnDeleteMedicineStockAmount.setBounds(643, 390, 72, 37);
 		panel.add(btnDeleteMedicineStockAmount);
-		
 	}
 }
