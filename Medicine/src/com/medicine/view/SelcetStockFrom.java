@@ -1,6 +1,6 @@
 package com.medicine.view;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue;		
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -33,6 +33,8 @@ public class SelcetStockFrom extends JInternalFrame {
 	private JTextField tfStockAmount;
 	private JTable table_1;
 	private JTextField textField;
+	JScrollPane scrollPane = new JScrollPane();
+	StorckDao storckdao = new StorckDaoImpl();
 
 	/**
 	 * Launch the application.
@@ -79,25 +81,19 @@ public class SelcetStockFrom extends JInternalFrame {
 		JButton btnSelcetMedicineStock = new JButton("\u67E5\u8BE2");
 		btnSelcetMedicineStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DefaultTableModel model = (DefaultTableModel)table.getModel();
+				Vector vData = new Vector<>();
 				String mname = tfMedicineName.getText();
-				StorckDao dao = new StorckDaoImpl();
-				Vector v = new Vector<>();
-				v.add("药品编号");
-				v.add("药品名称");
-				v.add("药品规格");
-				v.add("库存量");
 				if(mname != null && !("".equals(mname))){
-					model.setDataVector(dao.getByStockName(mname), v);
+					vData=storckdao.getByStockName(mname);
 				}else{
-					model.setDataVector(dao.getMedicineAmount(), v);
+					vData=storckdao.getMedicineAmount();
 				}	
+				setStockTable(vData);
 			}
 		});
 		btnSelcetMedicineStock.setBounds(383, 14, 72, 37);
 		panel.add(btnSelcetMedicineStock);
 		
-		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(56, 94, 649, 268);
 		panel.add(scrollPane);
 		
@@ -113,17 +109,8 @@ public class SelcetStockFrom extends JInternalFrame {
 				tfStockAmount.setText(stockAmount);
 			}
 		});
-		DefaultTableModel model = (DefaultTableModel)table.getModel();
-		StorckDao storckdao = new StorckDaoImpl();
-		Vector v = new Vector<>();
-		v.add("药品编号");
-		v.add("药品名称");
-		v.add("药品规格");
-		v.add("库存量");
-		model.setDataVector(storckdao.getMedicineAmount(), v);
-		table.setModel(model);
-		table.setBounds(49, 132, 673, 297);
-		scrollPane.setViewportView(table);
+		
+		setStockTable(storckdao.getMedicineAmount());
 		
 		JLabel label_2 = new JLabel("\u836F\u54C1\u7F16\u53F7\uFF1A");
 		label_2.setFont(new Font("宋体", Font.PLAIN, 16));
@@ -154,18 +141,9 @@ public class SelcetStockFrom extends JInternalFrame {
 				JOptionPane.showMessageDialog(null, tfMedicineId.getText());
 				stock.setAmount(Integer.parseInt(tfStockAmount.getText()));
 				JOptionPane.showMessageDialog(null,tfStockAmount.getText());
-				StorckDao dao = new StorckDaoImpl();
-				int row = dao.updateStorck(stock);
+				int row = storckdao.updateStorck(stock);
 				if(row ==1){
-					JOptionPane.showMessageDialog(null, "修改成功!!!");
-					DefaultTableModel model = (DefaultTableModel)table.getModel();
-					StorckDao storckdao = new StorckDaoImpl();
-					Vector v = new Vector<>();
-					v.add("药品编号");
-					v.add("药品名称");
-					v.add("药品规格");
-					v.add("库存量");
-					model.setDataVector(storckdao.getMedicineAmount(), v);
+					setStockTable(storckdao.getMedicineAmount());
 				}else{
 					JOptionPane.showMessageDialog(null, "修改失败！！！");
 				}
@@ -185,15 +163,7 @@ public class SelcetStockFrom extends JInternalFrame {
 				StorckDao dao = new StorckDaoImpl();
 				int rows = dao.deleStorck(Integer.parseInt(tfMedicineId.getText()));
 				if(rows !=0){
-					JOptionPane.showMessageDialog(null, "删除成功！！！");
-					DefaultTableModel model = (DefaultTableModel)table.getModel();
-					StorckDao storckdao = new StorckDaoImpl();
-					Vector v = new Vector<>();
-					v.add("药品编号");
-					v.add("药品名称");
-					v.add("药品规格");
-					v.add("库存量");
-					model.setDataVector(storckdao.getMedicineAmount(), v);
+					setStockTable(storckdao.getMedicineAmount());
 					tfMedicineId.setText("");
 					tfStockAmount.setText("");
 				}else{
@@ -203,5 +173,23 @@ public class SelcetStockFrom extends JInternalFrame {
 		});
 		btnDeleteMedicineStockAmount.setBounds(643, 390, 72, 37);
 		panel.add(btnDeleteMedicineStockAmount);
+	}
+	
+	/**
+	 * 
+	 */
+	public void setStockTable(Vector vStockData){
+		
+		DefaultTableModel model = (DefaultTableModel)table.getModel();
+		StorckDao storckdao = new StorckDaoImpl();
+		Vector vTitle = new Vector<>();
+		vTitle.add("药品编号");
+		vTitle.add("药品名称");
+		vTitle.add("药品规格");
+		vTitle.add("库存量");
+		model.setDataVector(vStockData, vTitle);
+		table.setModel(model);
+		table.setBounds(49, 132, 673, 297);
+		scrollPane.setViewportView(table);
 	}
 }
