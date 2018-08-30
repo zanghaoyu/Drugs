@@ -42,4 +42,9 @@ public class Supplier implements Serializable {
 	public void setPhone(String phone) {
 		Phone = phone;
 	}
+	@Override
+	public String toString() {
+		return suppliername;
+	}
+	
 }

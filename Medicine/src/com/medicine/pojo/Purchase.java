@@ -1,7 +1,7 @@
 package com.medicine.pojo;
 
-import java.io.Serializable;
-import java.sql.Date;
+import java.io.Serializable;	
+import java.util.Date;
 
 public class Purchase implements Serializable {
 

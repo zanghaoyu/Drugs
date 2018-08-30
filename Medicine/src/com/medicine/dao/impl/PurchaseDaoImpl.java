@@ -22,9 +22,9 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		
 	}
 
+
 	@Override
-	public String addPurid(Purchase purchas) {
-		
+	public String getMaxId(Purchase purchas) {
 		Connection conn=null;
 		PreparedStatement pstm=null;
 		ResultSet rs=null;

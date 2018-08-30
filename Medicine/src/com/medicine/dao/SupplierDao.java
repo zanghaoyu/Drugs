@@ -11,7 +11,7 @@ public interface SupplierDao {
 	public int addSupplier(Supplier supplier);
 	
 	
-	public List<String> checkSupplier();
+	public List<Supplier> checkSupplier();
 	
 	//²éÑ¯ËùÓĞ
 	public Vector getAllSupplier();

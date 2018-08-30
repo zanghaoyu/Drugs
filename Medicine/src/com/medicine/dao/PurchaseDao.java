@@ -5,8 +5,8 @@ import com.medicine.pojo.Purchase;
 public interface PurchaseDao {
 	
 	//添加药品
-		public int getPurchas(Purchase purchas);
+	public int getPurchas(Purchase purchas);
 		
-	//添加purid
-		public String addPurid(Purchase purchas);
+	//获取id最大值
+	public String getMaxId(Purchase purchas);
 }

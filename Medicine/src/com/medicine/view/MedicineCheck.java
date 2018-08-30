@@ -20,6 +20,7 @@ import com.medicine.dao.SupplierDao;
 import com.medicine.dao.impl.MedicineDaoImpl;
 import com.medicine.dao.impl.SupplierDaoImpl;
 import com.medicine.pojo.Medicine;
+import com.medicine.pojo.Supplier;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -173,7 +174,7 @@ public class MedicineCheck extends JInternalFrame {
 		SupplierDao sd = new SupplierDaoImpl();
 		
 		JComboBox comboBox = new JComboBox();
-		List<String> vec=sd.checkSupplier();
+		List<Supplier> vec=sd.checkSupplier();
 		for (Object o: vec) {
 			comboBox.addItem(o);
 		}

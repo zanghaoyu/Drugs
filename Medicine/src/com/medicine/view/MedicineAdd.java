@@ -1,6 +1,6 @@
 package com.medicine.view;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue;	
 import java.util.List;
 import java.util.Vector;
 
@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,6 +27,9 @@ import com.medicine.pojo.Purchase;
 import com.medicine.pojo.Supplier;
 
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 
 public class MedicineAdd extends JInternalFrame {
@@ -126,10 +130,11 @@ public class MedicineAdd extends JInternalFrame {
 		SupplierDao sd = new SupplierDaoImpl();
 		
 		JComboBox comboBox = new JComboBox();
-		List<String> vec=sd.checkSupplier();
+		List<Supplier> vec=sd.checkSupplier();
 		for (Object o: vec) {
 			comboBox.addItem(o);
 		}
+		
 		comboBox.setBounds(548, 70, 106, 21);
 		
 		panel.add(comboBox);
@@ -154,22 +159,63 @@ public class MedicineAdd extends JInternalFrame {
 		JButton btnNewButton = new JButton("\u6DFB\u52A0");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//创建实体类
 				Medicine medi = new Medicine();
 				Purchase pur=new Purchase();
 				Supplier supp=new Supplier();
 				
-				//获取信息
+				
+				//创建dao的实现类
+				MedicineDao md=new MedicineDaoImpl();
+				PurchaseDao pd=new PurchaseDaoImpl();
+				
+				//获取药品信息
 				medi.setMedicineId(textmedicineId.getText());
 				medi.setEmdicineName(textmedicinename.getText());
-				pur.setPurchaseprice(Float.parseFloat(textpurchaseprice.getText()));
 				medi.setUnit(textunit.getText());
 				medi.setRegion(textregion.getText());
 				medi.setRetailPrice(Float.parseFloat(textretailprice.getText()));
+				medi.setMedicineTypeId(null);
 				
-		
+				//获取购药表信息
+				//添加MedicineId
+				pur.setMedicineId(textmedicineId.getText());
+				//添加日期
+				Date data = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+				String date1 = sdf.format(data);
+				Date d = null;
+				try {
+					d = sdf.parse(date1);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				pur.setPurchasedate(d);
+				//添加purchaseprice
+				pur.setPurchaseprice(Float.parseFloat(textpurchaseprice.getText()));
+				//添加Supplierid	
+				Supplier s = (Supplier)comboBox.getSelectedItem();
+				pur.setSupplierid(s.getSupplierid());
+				//添加库存
+				pur.setPurchaseamout(10);
+				//添加purchaseid
+				String id = pd.getMaxId(pur);
+				System.out.println(id);
+				int i=Integer.parseInt(pd.getMaxId(pur));
+				JOptionPane.showMessageDialog(null, i);
+				String purchaseid = String.valueOf(i+1);
+				JOptionPane.showMessageDialog(null, purchaseid);
+				pur.setPurchaseid(purchaseid);
 				
+				//添加药品表
+						md.addDrug(medi);
+				
+				//添加购药表
+						pd.getPurchas(pur);
 				
 			}
+			
 		});
 		btnNewButton.setBounds(558, 134, 77, 31);
 		panel.add(btnNewButton);

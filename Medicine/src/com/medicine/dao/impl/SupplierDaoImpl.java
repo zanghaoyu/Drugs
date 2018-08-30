@@ -22,18 +22,21 @@ public class SupplierDaoImpl implements SupplierDao {
 									supplier.getAddress(),supplier.getPhone());
 	}
 	@Override
-	public List<String> checkSupplier() {
+	public List<Supplier> checkSupplier() {
 		Connection conn=null;
 		PreparedStatement pstm=null;
 		ResultSet rs=null;
-		String sql="SELECT suppliername FROM t_supplier";
-		List<String> list = new ArrayList<>();
+		String sql="SELECT supplierid,suppliername FROM t_supplier";
+		List<Supplier> list = new ArrayList<>();
 		try {
 			conn=DBUTIL.getConn();
 			pstm=conn.prepareStatement(sql);
 			rs=pstm.executeQuery();
 			while(rs.next()){
-				list.add(rs.getString("suppliername"));
+				Supplier s = new Supplier();
+				s.setSupplierid(rs.getString("supplierid"));
+				s.setSuppliername(rs.getString("suppliername"));
+				list.add(s);
 				
 			}
 		} catch (Exception e) {
