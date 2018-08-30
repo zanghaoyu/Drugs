@@ -74,7 +74,7 @@ public class MedicineDaoImpl implements MedicineDao{
 				+ " AND p.supplierid=s.supplierid"
 				+ " AND s.suppliername=?";
 		Vector vector=new Vector<>();
-		System.out.println(sql);
+		
 		try {
 			conn=DBUTIL.getConn();
 			pstm=conn.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class MedicineDaoImpl implements MedicineDao{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			
+			DBUTIL.close(conn, pstm , rs);
 		}
 		return row;
 	}
