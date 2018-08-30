@@ -19,4 +19,7 @@ public interface CustomerDao {
 	
 	//修改患者
 	public int updateCustomer(Customer customer);
+	
+	//查找患者编号、姓名、身份证号
+	public Vector getCustomerSele();
 }

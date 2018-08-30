@@ -97,4 +97,30 @@ public class CustomerDaoImpl implements CustomerDao {
 		return rows;
 	}
 
+	@Override
+	public Vector getCustomerSele() {
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql="SELECT customerid,customername,cardId "
+				+ "FROM t_customer";
+		Vector rowVector = new Vector<>();
+		try {
+			conn =DBUTIL.getConn();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			Vector v ;
+			while(rs.next()){
+				v = new Vector<>();
+				v.add(rs.getString(1));
+				v.add(rs.getString(2));
+				v.add(rs.getString(3));
+				rowVector.add(v);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return rowVector;
+	}
+
 }
