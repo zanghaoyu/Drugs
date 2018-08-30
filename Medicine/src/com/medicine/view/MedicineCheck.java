@@ -1,6 +1,7 @@
 package com.medicine.view;
 
 import java.awt.EventQueue;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -15,19 +16,26 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.medicine.dao.MedicineDao;
+import com.medicine.dao.SupplierDao;
 import com.medicine.dao.impl.MedicineDaoImpl;
+import com.medicine.dao.impl.SupplierDaoImpl;
+import com.medicine.pojo.Medicine;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MedicineCheck extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textSuppName;
+	private JTextField textPprice;
+	private JTextField textMid;
+	private JTextField textMname;
+	private JTextField textMRetprice;
+	private JTextField textMunit;
+	private JTextField textMregion;
 	private JTable table;
-	//private JTable table;
-	
+	// private JTable table;
 
 	/**
 	 * Launch the application.
@@ -66,14 +74,40 @@ public class MedicineCheck extends JInternalFrame {
 		label.setBounds(31, 31, 79, 27);
 		panel.add(label);
 		
-		textField = new JTextField();
-		textField.setBounds(105, 27, 91, 35);
-		panel.add(textField);
-		textField.setColumns(10);
+		textSuppName = new JTextField();
+		textSuppName.setBounds(105, 27, 91, 35);
+		panel.add(textSuppName);
+		textSuppName.setColumns(10);
 		
-		JButton button = new JButton("\u67E5\u8BE2");
-		button.setBounds(527, 24, 93, 40);
-		panel.add(button);
+		//查询
+		JButton buttCheck = new JButton("\u67E5\u8BE2");
+		buttCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel model=(DefaultTableModel) table.getModel();
+				
+				MedicineDao md=new MedicineDaoImpl();
+				
+				String sSuppName=textSuppName.getText();
+				
+				Vector v=new Vector<>();
+				v.add("药品编号");
+				v.add("药品名称");
+				v.add("药品规格");
+				v.add("药品产地");
+				v.add("供货商名称");
+				v.add("进价");
+				v.add("零售价");
+				
+				if(sSuppName!=null && !("".equals(sSuppName))){
+					model.setDataVector(md.checkDurg(sSuppName),v);
+				}else{
+					model.setDataVector(md.getAllDrug(), v);
+				}
+			}
+		});
+		
+		buttCheck.setBounds(527, 24, 93, 40);
+		panel.add(buttCheck);
 		
 		JLabel label_1 = new JLabel("\u836F\u54C1\u7F16\u53F7");
 		label_1.setBounds(56, 234, 54, 15);
@@ -83,16 +117,16 @@ public class MedicineCheck extends JInternalFrame {
 		label_2.setBounds(56, 273, 54, 15);
 		panel.add(label_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(105, 270, 106, 21);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textPprice = new JTextField();
+		textPprice.setBounds(105, 270, 106, 21);
+		panel.add(textPprice);
+		textPprice.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setEnabled(false);
-		textField_2.setColumns(10);
-		textField_2.setBounds(105, 231, 106, 21);
-		panel.add(textField_2);
+		textMid = new JTextField();
+		textMid.setEnabled(false);
+		textMid.setColumns(10);
+		textMid.setBounds(105, 231, 106, 21);
+		panel.add(textMid);
 		
 		JLabel label_3 = new JLabel("\u5143");
 		label_3.setBounds(221, 273, 20, 15);
@@ -106,15 +140,16 @@ public class MedicineCheck extends JInternalFrame {
 		label_5.setBounds(269, 234, 54, 15);
 		panel.add(label_5);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(321, 231, 106, 21);
-		panel.add(textField_3);
+		textMname = new JTextField();
+		textMname.setColumns(10);
+		textMname.setBounds(321, 231, 106, 21);
+		panel.add(textMname);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(321, 270, 106, 21);
-		panel.add(textField_4);
+		textMRetprice = new JTextField();
+		textMRetprice.setEnabled(false);
+		textMRetprice.setColumns(10);
+		textMRetprice.setBounds(321, 270, 106, 21);
+		panel.add(textMRetprice);
 		
 		JLabel label_6 = new JLabel("\u836F\u54C1\u89C4\u683C");
 		label_6.setBounds(475, 234, 54, 15);
@@ -124,17 +159,24 @@ public class MedicineCheck extends JInternalFrame {
 		label_7.setBounds(475, 273, 70, 15);
 		panel.add(label_7);
 		
-		textField_5 = new JTextField();
-		textField_5.setEnabled(false);
-		textField_5.setColumns(10);
-		textField_5.setBounds(555, 231, 106, 21);
-		panel.add(textField_5);
+		textMunit = new JTextField();
+		textMunit.setEnabled(false);
+		textMunit.setColumns(10);
+		textMunit.setBounds(555, 231, 106, 21);
+		panel.add(textMunit);
 		
 		JLabel label_8 = new JLabel("\u5143");
 		label_8.setBounds(432, 273, 20, 15);
 		panel.add(label_8);
 		
+		//供应商名称
+		SupplierDao sd = new SupplierDaoImpl();
+		
 		JComboBox comboBox = new JComboBox();
+		List<String> vec=sd.checkSupplier();
+		for (Object o: vec) {
+			comboBox.addItem(o);
+		}
 		comboBox.setBounds(555, 270, 106, 21);
 		panel.add(comboBox);
 		
@@ -142,14 +184,54 @@ public class MedicineCheck extends JInternalFrame {
 		label_9.setBounds(56, 324, 54, 15);
 		panel.add(label_9);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(134, 321, 440, 21);
-		panel.add(textField_6);
+		textMregion = new JTextField();
+		textMregion.setColumns(10);
+		textMregion.setBounds(134, 321, 440, 21);
+		panel.add(textMregion);
 		
-		JButton button_1 = new JButton("\u4FEE\u6539");
-		button_1.setBounds(91, 361, 93, 23);
-		panel.add(button_1);
+		//修改
+		JButton buttCharge = new JButton("\u4FEE\u6539");
+		buttCharge.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String str=textMid.getText();
+				//JOptionPane.showMessageDialog(null, str);
+				int i=JOptionPane.showConfirmDialog(null, "是否修改");
+				if(i!=0){
+					return;
+				}
+				
+				MedicineDao mdao=new MedicineDaoImpl();
+				Vector connectv=mdao.connect(str);
+				int a=connectv.size();
+				if(a!=0){
+					Medicine med=new Medicine();
+					med.setEmdicineName(textMname.getText());
+					med.setUnit(textMunit.getText());
+					med.setRegion(textMregion.getText());
+					med.setRetailPrice(Float.parseFloat(textMRetprice.getText()));
+					med.setMedicineId(str);
+					
+					int rows=mdao.chargeDrug(med);
+					if(rows!=0){
+						JOptionPane.showMessageDialog(null, "修改成功");
+						DefaultTableModel model=(DefaultTableModel) table.getModel();
+						
+						Vector v = new Vector();
+						v.add("药品编号");
+						v.add("药品名称");
+						v.add("药品规格");
+						v.add("药品产地");
+						v.add("供货商名称");
+						v.add("进价");
+						v.add("零售价");
+						model.setDataVector(mdao.getAllDrug(), v);
+					}
+				}
+			}
+		});
+		buttCharge.setBounds(91, 361, 93, 23);
+		panel.add(buttCharge);
 		
 		JButton button_2 = new JButton("\u5220\u9664");
 		button_2.setBounds(500, 361, 93, 23);
@@ -160,9 +242,30 @@ public class MedicineCheck extends JInternalFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			
+			@Override//获取表中的数据
+			public void mouseClicked(MouseEvent e) {
+				int row=table.getSelectedRow();
+				String sMid=table.getValueAt(row, 0).toString();
+				String sMname=table.getValueAt(row, 1).toString();
+				String sMunit=table.getValueAt(row, 2).toString();
+				String sMpprice=table.getValueAt(row, 5).toString();
+				String sMrprice=table.getValueAt(row, 6).toString();
+				String sMreg=table.getValueAt(row, 3).toString();
+				String sSupp=table.getValueAt(row, 4).toString();
+				
+				textMid.setText(sMid);
+				textMname.setText(sMname);
+				textMunit.setText(sMunit);
+				textMRetprice.setText(sMrprice);
+				textMregion.setText(sMreg);
+				textPprice.setText(sMpprice);
+			
+				
+			}
+		});
 		scrollPane.setViewportView(table);
-		
-		
 		
 		DefaultTableModel model = (DefaultTableModel)table.getModel();
 		MedicineDao bookTypeDao = new MedicineDaoImpl();
