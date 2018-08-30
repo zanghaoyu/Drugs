@@ -144,4 +144,36 @@ public class MedicineDaoImpl implements MedicineDao{
 		return vector;
 		
 	}
+
+	@Override //≤È—Ø“©∆∑ID£¨name£¨unit£¨retaile
+	public Vector getAllDrugSale() {
+		Connection conn = null;
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		String sql = "SELECT MedicineId,Medicinename,unit,Retailprice "
+					+ "FROM t_medicine ";
+		Vector row = new Vector<>();
+		try {
+			conn = DBUTIL.getConn();
+			pstm = conn.prepareStatement(sql);
+			rs = pstm.executeQuery();
+			Vector v ;
+			while(rs.next()){
+				v = new Vector<>();
+				v.add(rs.getString("MedicineId"));
+				v.add(rs.getString("Medicinename"));
+				v.add(rs.getString("unit"));
+				v.add(rs.getFloat("Retailprice"));
+				row.add(v);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			
+		}
+		return row;
+	}
+	
+	
 }

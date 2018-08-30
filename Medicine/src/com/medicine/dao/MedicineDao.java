@@ -20,5 +20,8 @@ public interface MedicineDao {
 	//判断是否关联
 	public Vector connect(String str);
 	
+	//查询药品编号，名称，规格，零售价
+	public Vector getAllDrugSale();
+	
 	
 }
