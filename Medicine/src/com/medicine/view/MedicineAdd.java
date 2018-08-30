@@ -209,10 +209,10 @@ public class MedicineAdd extends JInternalFrame {
 				pur.setPurchaseid(purchaseid);
 				
 				//添加药品表
-						md.addDrug(medi);
+				md.addDrug(medi);
 				
 				//添加购药表
-						pd.getPurchas(pur);
+				pd.getPurchas(pur);
 				
 			}
 			
